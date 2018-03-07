@@ -85,13 +85,13 @@ armourbuylvlno = 1
 armourlvl = 1
 
 window = pygame.display.set_mode((0,0), FULLSCREEN)
-#WIDTH, HEIGHT = window.get_rect().size
-WIDTH = 1366
-HEIGHT = 768
-mainX = 500
-mainY = 250
-orcX = 750
-orcY = 500
+WIDTH, HEIGHT = window.get_rect().size
+#WIDTH = 1366
+#HEIGHT = 768
+mainX = WIDTH/3
+mainY = HEIGHT/3
+orcX = WIDTH/2
+orcY = HEIGHT/2
 
 background = window.copy()
 background.fill(WHITE)
