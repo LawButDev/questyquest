@@ -50,7 +50,7 @@ M6 = pygame.image.load('sprites/6.bmp')
 M7 = pygame.image.load('sprites/7.bmp')
 M8 = pygame.image.load('sprites/8.bmp')
 M9 = pygame.image.load('sprites/9.bmp')
-Mback = pygame.image.load('sprites/mback.bmp')
+Mback = pygame.image.load('sprites/Mback.bmp')
 
 C1 = M0
 C1no = 0
