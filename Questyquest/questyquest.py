@@ -511,12 +511,19 @@ def process_events():
                 if area == "blacksmith":
                     if mainX == 625 and mainY == 250:
                         if armourbuylvlno == 1:
-                            if C2no > 0:
+                            if C3no > 0:
                                 C1no = C1no - AC1no
+                                C2no = C2no - AC2no
                                 armourbuylvlno = 2
                                 armourlvl = 2
-                            elif C1no > AC1no-1:
+                            elif C2no > AC2no-1 and C1no > AC1no-1:
                                 C1no = C1no - AC1no
+                                C2no = C2no - AC2no
+                                armourbuylvlno = 2
+                                armourlvl = 2
+                            elif C2no > AC2no:
+                                C1no = C1no - AC1no
+                                C2no = C2no - AC2no
                                 armourbuylvlno = 2
                                 armourlvl = 2
                         elif armourbuylvlno == 2:
@@ -927,16 +934,16 @@ while play > end:
             window.blit(AC1, (715,200))
         if armourbuylvlno == 1:
             armourbuylvl = armourbuy1
-            AC2 = M0
+            AC2 = M2
             AC1 = M5
-            AC2no = 0
+            AC2no = 2
             AC1no = 5
         elif armourbuylvlno == 2:
             armourbuylvl = armourbuy2
-            AC2 = M1
-            AC1 = M5
-            AC2no = 1
-            AC1no = 5
+            AC2 = M5
+            AC1 = M0
+            AC2no = 5
+            AC1no = 0
     elif area == "battle":
         if armourlvl == 1:
             mainguy = main2
