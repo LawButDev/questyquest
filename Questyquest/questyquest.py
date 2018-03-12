@@ -1,8 +1,9 @@
 import pygame
-import decimal
 from pygame.locals import*
 from random import*
+from itertools import product
 import time
+import math
 
 main = pygame.image.load('sprites/guy_white_shirt_brown_shorts.bmp')
 main2 = pygame.image.load('sprites/guy_white_shirt_brown_shorts2.bmp')
@@ -86,14 +87,13 @@ armourlvl = 1
 
 window = pygame.display.set_mode((0,0), FULLSCREEN)
 WIDTH, HEIGHT = window.get_rect().size
-squareSizeX = WIDTH/11
-squareSizeY = WIDTH/6
+squareSize = math.floor(WIDTH/11)
 #WIDTH = 1366
 #HEIGHT = 768
-mainX = 5*squareSizeX
-mainY = 3*squareSizeY
-orcX = 7*squareSizeX
-orcY = 3*squareSizeX
+mainX = 5*squareSize
+mainY = 3*squareSize
+orcX = 7*squareSize
+orcY = 3*squareSize
 
 background = window.copy()
 background.fill(WHITE)
@@ -130,7 +130,8 @@ def process_events():
     for event in events:
         if event.type == KEYDOWN:
             if event.key == K_UP:
-                if area == "blacksmith" and mainY == 125:
+                print(mainY)
+                if area == "blacksmith" and mainY == squareSize*2:
                     mainY = mainY - 0
                     mainguyup = 0
                     if armourlvl == 1:
@@ -155,17 +156,17 @@ def process_events():
                         mainY = mainY - 0
                         mainguyup = 0
                         mainguy = mainA23
-                elif area == "blacksmith" and mainY > 125:
+                elif area == "blacksmith" and mainY > squareSize:
                     if armourlvl == 1:
-                        mainY = mainY - 125
+                        mainY = mainY - squareSize
                         mainguyup = 0
                         mainguy = main4
                     if armourlvl == 2:
-                        mainY = mainY - 125
+                        mainY = mainY - squareSize
                         mainguyup = 0
                         mainguy = mainA13
                     if armourlvl == 3:
-                        mainY = mainY - 125
+                        mainY = mainY - squareSize
                         mainguyup = 0
                         mainguy = mainA23
                 elif area == "battle":
@@ -235,7 +236,7 @@ def process_events():
                         if armourlvl == 3:
                             mainguyup = 0
                             mainguy = mainA23
-                    elif mainX == 125 and mainY == 375:
+                    elif mainX == squareSize and mainY == 375:
                         mainY = mainY - 0
                         mainguyup = 0
                         if armourlvl == 1:
@@ -265,15 +266,15 @@ def process_events():
                         mainY = 500
                     elif mainY > 0:
                         if armourlvl == 1:
-                            mainY = mainY - 125
+                            mainY = mainY - squareSize
                             mainguyup = 0
                             mainguy = main4
                         if armourlvl == 2:
-                            mainY = mainY - 125
+                            mainY = mainY - squareSize
                             mainguyup = 0
                             mainguy = mainA13
                         if armourlvl == 3:
-                            mainY = mainY - 125
+                            mainY = mainY - squareSize
                             mainguyup = 0
                             mainguy = mainA23
                 elif mainY == 0:
@@ -283,15 +284,15 @@ def process_events():
                 elif mainY > 0:
                     mainguyup = 0
                     if armourlvl == 1:
-                        mainY = mainY - 125
+                        mainY = mainY - squareSize
                         mainguyup = 0
                         mainguy = main4
                     if armourlvl == 2:
-                        mainY = mainY - 125
+                        mainY = mainY - squareSize
                         mainguyup = 0
                         mainguy = mainA13
                     if armourlvl == 3:
-                        mainY = mainY - 125
+                        mainY = mainY - squareSize
                         mainguyup = 0
                         mainguy = mainA23
             elif event.key == K_DOWN:
@@ -317,7 +318,7 @@ def process_events():
                         if armourlvl == 3:
                             mainuy = mainA22
                 elif mainY < 625:
-                    mainY = mainY + 125
+                    mainY = mainY + squareSize
                     mainguyup = 1
                     if mainguyside == 1:
                         if armourlvl == 1:
@@ -366,7 +367,7 @@ def process_events():
                 elif area == "battle":
                     mainX = mainX
                 elif area == "shops":
-                    if mainX == 625 and mainY == 125:
+                    if mainX == 625 and mainY == squareSize:
                         mainX = mainX + 0
                         mainguyside = 0
                         if armourlvl == 1:
@@ -394,7 +395,7 @@ def process_events():
                         if armourlvl == 3:
                             mainguy = mainA22
                     elif mainX < 1250:
-                        mainX = mainX + 125
+                        mainX = mainX + squareSize
                         mainguyside = 0
                         if armourlvl == 1:
                             mainguy = main2
@@ -403,7 +404,7 @@ def process_events():
                         if armourlvl == 3:
                             mainguy = mainA22
                 elif mainX < 1250:
-                    mainX = mainX + 125
+                    mainX = mainX + squareSize
                     mainguyside = 0
                     if armourlvl == 1:
                         mainguy = main2
@@ -424,7 +425,7 @@ def process_events():
                 elif area == "battle":
                     mainX = mainX
                 elif area == "shops":
-                    if mainX == 625 and mainY == 125:
+                    if mainX == 625 and mainY == squareSize:
                         mainX = mainX - 0
                         mainguyside = 0
                         if armourlvl == 1:
@@ -452,7 +453,7 @@ def process_events():
                         if armourlvl == 3:
                             mainguy = mainA21
                     elif mainX > 0:
-                        mainX = mainX - 125
+                        mainX = mainX - squareSize
                         mainguyside = 0
                         if armourlvl == 1:
                             mainguy = main
@@ -461,7 +462,7 @@ def process_events():
                         if armourlvl == 3:
                             mainguy = mainA21
                 elif mainX > 0:
-                    mainX = mainX - 125
+                    mainX = mainX - squareSize
                     mainguyside = 1
                     if armourlvl == 1:
                         mainguy = main
@@ -693,83 +694,28 @@ while play > end:
     elif C4no == 9:
         C4 = M9
     if area == "plains":
-        window.blit(grass, (0,0))
-        window.blit(grass, (125,0))
-        window.blit(dirt, (250,0))
-        window.blit(grass, (375,0))
-        window.blit(grass, (500,0))
-        window.blit(grass, (625,0))
-        window.blit(grass, (750,0))
-        window.blit(grass, (875,0))
-        window.blit(dirt, (1000,0))
-        window.blit(grass, (1125,0))
-        window.blit(grass, (1250,0))
-        window.blit(grass, (0,125))
-        window.blit(grass, (125,125))
-        window.blit(dirt, (250,125))
-        window.blit(grass, (375,125))
-        window.blit(grass, (500,125))
-        window.blit(grass, (625,125))
-        window.blit(grass, (750,125))
-        window.blit(grass, (875,125))
-        window.blit(dirt, (1000,125))
-        window.blit(grass, (1125,125))
-        window.blit(grass, (1250,125))
-        window.blit(dirt, (0,250))
-        window.blit(dirt, (125,250))
-        window.blit(dirt, (250,250))
-        window.blit(dirt, (375,250))
-        window.blit(dirt, (500,250))
-        window.blit(dirt, (625,250))
-        window.blit(dirt, (750,250))
-        window.blit(dirt, (875,250))
-        window.blit(dirt, (1000,250))
-        window.blit(dirt, (1125,250))
-        window.blit(dirt, (1250,250))
-        window.blit(grass, (0,375))
-        window.blit(grass, (125,375))
-        window.blit(grass, (250,375))
-        window.blit(grass, (375,375))
-        window.blit(dirt, (500,375))
-        window.blit(grass, (625,375))
-        window.blit(grass, (750,375))
-        window.blit(grass, (875,375))
-        window.blit(grass, (1000,375))
-        window.blit(grass, (1125,375))
-        window.blit(grass, (1250,375))
-        window.blit(grass, (0,500))
-        window.blit(grass, (125,500))
-        window.blit(grass, (250,500))
-        window.blit(grass, (375,500))
-        window.blit(dirt, (500,500))
-        window.blit(grass, (625,500))
-        window.blit(grass, (750,500))
-        window.blit(grass, (875,500))
-        window.blit(grass, (1000,500))
-        window.blit(grass, (1125,500))
-        window.blit(grass, (1250,500))
-        window.blit(grass, (0,625))
-        window.blit(grass, (125,625))
-        window.blit(grass, (250,625))
-        window.blit(grass, (375,625))
-        window.blit(dirt, (500,625))
-        window.blit(grass, (625,625))
-        window.blit(grass, (750,625))
-        window.blit(grass, (875,625))
-        window.blit(grass, (1000,625))
-        window.blit(grass, (1125,625))
-        window.blit(grass, (1250,625))
-        window.blit(grass, (0,750))
-        window.blit(grass, (125,750))
-        window.blit(grass, (250,750))
-        window.blit(grass, (375,750))
-        window.blit(dirt, (500,750))
-        window.blit(grass, (625,750))
-        window.blit(grass, (750,750))
-        window.blit(grass, (875,750))
-        window.blit(grass, (1000,750))
-        window.blit(grass, (1125,750))
-        window.blit(grass, (1250,750))
+        dirts=[(squareSize*2, squareSize*0), (squareSize*8, squareSize*0)]
+        for (x, y) in product(range(0,11*squareSize, squareSize), repeat=2):
+            if (x,y) in dirts:
+                window.blit(dirt, (x, y))
+            else:
+                window.blit(grass, (x, y))
+##        window.blit(dirt, (250,125))#
+##        window.blit(dirt, (0,250))#
+##        window.blit(dirt, (125,250))#
+##        window.blit(dirt, (250,250))#
+##        window.blit(dirt, (375,250))#
+##        window.blit(dirt, (500,250))#
+##        window.blit(dirt, (625,250))#
+##        window.blit(dirt, (750,250))#
+##        window.blit(dirt, (875,250))#
+##        window.blit(dirt, (1000,250))#
+##        window.blit(dirt, (1125,250))#
+##        window.blit(dirt, (1250,250))#
+##        window.blit(dirt, (500,375))#
+##        window.blit(dirt, (500,500))#
+##        window.blit(dirt, (500,625))#
+##        window.blit(dirt, (500,750))#
         window.blit(orc, (orcX,orcY))
     if area == "shops":
         window.blit(grass, (0,750))
